@@ -19,8 +19,12 @@ const words = [
   ];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 let word = [];
+if(player){
+    let TotalWordsSuccess = player.TotalWordsSuccess || 0;
+}else{
+    let TotalWordsSuccess = 0;
+}
 
-let TotalWordsSuccess = player.TotalWordsSuccess || 0;
 let guessedLetters = [];
 let wrongLetters = [];
 let errorLetters = -1;
