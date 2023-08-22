@@ -80,6 +80,7 @@ h1 {
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.2s;
+    z-index: 999;
 }
 
 .restart:hover {
@@ -166,5 +167,15 @@ h1 {
 .total-words strong {
     color: #13b356;
     margin: 0 10px;
+}
+canvas {
+    display: flex;
+    position: absolute;
+    opacity: 0;
+    z-index: 0;
+}
+canvas.show {
+    opacity: 1;
+    z-index: 1;
 }
 

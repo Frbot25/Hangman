@@ -40,13 +40,15 @@ const words = [
     // Ajoutez plus de mots ici...
   ];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
+let TotalWordsSuccess = 0;
 let word = [];
 if(player){
-    let TotalWordsSuccess = player.TotalWordsSuccess || 0;
+    TotalWordsSuccess = player.TotalWordsSuccess || 0;
 }else{
-    let TotalWordsSuccess = 0;
+    TotalWordsSuccess = 0;
 }
 
+const confetis = document.getElementById('confetti');
 let guessedLetters = [];
 let wrongLetters = [];
 let errorLetters = -1;
@@ -103,16 +105,18 @@ function parseSVG(s) {
 }
 // Initialize the game
 function initGame() {
+    console.log(selectedWord);
     document.getElementById('added-parts').innerHTML='';
     const player = JSON.parse(localStorage.getItem('player'));
     guessedLetters = [];
     word = [];
     errorLetters = -1;
-       score = 0;
-       if(player){
-    scorePlayer.textContent =player.score;
-    playerName.textContent = player.name;
+    score = 0;
+    if(player){
+        scorePlayer.textContent =player.score;
+        playerName.textContent = player.name;
     }
+    confetis.classList.remove('show');
     guessedLetters = [];
     wrongLetters = [];
     selectedWord = words[Math.floor(Math.random() * words.length)];
@@ -131,20 +135,26 @@ function updateWordContainer() {
     .split('')
     .map(letter => guessedLetters.includes(letter) ? letter : '_')
     .join(' ');
-    if(wrongLetters.length == 6){
-        restartButton.style.display = 'block';
-        restartButton.textContent = 'You Lose! Play Again';
-        endGame();
-        return;
-    }
+    console.log(wordContainer.innerHTML);
+    console.log(selectedWord);
     if (!wordContainer.innerHTML.includes('_')) {
         console.log(wordContainer.innerHTML);
         TotalWordsSuccess = TotalWordsSuccess + 1;
+        console.log(TotalWordsSuccess);
         localStorage.setItem('player', JSON.stringify({name: playerName.textContent, score: score, TotalWordsSuccess: TotalWordsSuccess}));
         restartButton.style.display = 'block';
         endGame();
         buttonDelete.style.display = 'block';
         restartButton.textContent = 'You Win! Play Again';
+        if(confetis){
+        confetis.classList.add('show');
+    }
+}
+    if(wrongLetters.length == 6){
+        restartButton.style.display = 'block';
+        restartButton.textContent = 'You Lose! Play Again';
+        endGame();
+        return;
     }
 }
 
