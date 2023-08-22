@@ -120,6 +120,9 @@ h1 {
         transform: translateX(-10px);
     }
 }
+.modal {
+    z-index: 999;
+}
 .modal form {
     align-items: center;
     align-items: center;
