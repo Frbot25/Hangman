@@ -19,7 +19,7 @@ const words = [
   ];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 let word = [];
-const localStorage = window.localStorage.getItem('player');
+
 let TotalWordsSuccess = player.TotalWordsSuccess || 0;
 let guessedLetters = [];
 let wrongLetters = [];
