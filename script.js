@@ -83,7 +83,6 @@ if(player){
 if(modal){
 modalButton.addEventListener('click', function(e) {
     e.preventDefault();
-    console.log(modalInput.value);
     localStorage.setItem('player', JSON.stringify({name: modalInput.value, score: 0, TotalWordsSuccess: 0}));
     if(modalInput.value == ''){
         localStorage.setItem('player', JSON.stringify({name: 'player', score: 0}));
@@ -134,12 +133,8 @@ function updateWordContainer() {
     .split('')
     .map(letter => guessedLetters.includes(letter) ? letter : '_')
     .join(' ');
-    console.log(wordContainer.innerHTML);
-    console.log(selectedWord);
     if (!wordContainer.innerHTML.includes('_')) {
-        console.log(wordContainer.innerHTML);
         TotalWordsSuccess = TotalWordsSuccess + 1;
-        console.log(TotalWordsSuccess);
         localStorage.setItem('player', JSON.stringify({name: playerName.textContent, score: score, TotalWordsSuccess: TotalWordsSuccess}));
         restartButton.style.display = 'block';
         endGame();
