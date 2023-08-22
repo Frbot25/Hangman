@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Hangman Game</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Hangman Game</h1>
+        <div class="modal">
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name">
+                <button type="submit" id="submit">Submit</button>
+            </form>
+        </div>
+        <svg id="hangman-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 400 500" stroke="#000000" fill="none">
+            <polyline stroke-width="10" stroke-miterlimit="10" points="253.996,142.899 253.996,59.666 115.663,59.666 115.663,434.999 "/>
+            <line stroke-width="10" stroke-miterlimit="10" x1="392.33" y1="434.999" x2="8.33" y2="434.999"/>
+            <g id="added-parts">
+            </g>
+        </svg>
+        <div class="player-name">Player name: <strong></strong></div>
+        <span class="player-score">Score: <strong></strong></span>
+        <div class="total-words">NB Words Success :<strong></strong></div>
+        <div class="game">
+            <div class="word-container" id="word-container"></div>
+            <div class="wrong-letters" id="wrong-letters"></div>
+            <div class="buttons-container" id="buttons-container"></div>
+            <button class="restart" id="restart" type="button">Restart</button>
+            <button class="delete" id="delete" type="button" >Delete scores</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
