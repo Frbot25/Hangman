@@ -105,7 +105,6 @@ function parseSVG(s) {
 }
 // Initialize the game
 function initGame() {
-    console.log(selectedWord);
     document.getElementById('added-parts').innerHTML='';
     const player = JSON.parse(localStorage.getItem('player'));
     guessedLetters = [];
