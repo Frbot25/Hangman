@@ -15,8 +15,8 @@ version mobile
 * script.js
   
 
-  remains to correct the update of the score
+I created the hangman game entirely in vanilla javascript, the game has themes and three levels of difficulty.
 
-  features :
-  * v2 Add categories
+Score management is present, so do not hesitate to try it!
   
+Good luck!
