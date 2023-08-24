@@ -8,15 +8,172 @@ const modal = document.querySelector('.modal');
 const modalButton = document.querySelector('.modal button');
 const modalInput = document.querySelector('.modal input');
 const totalWords = document.querySelector('.total-words strong');
-const words = [
+let words = [
     {
-        animal: ["chat", "chien", "maison", "soleil", "arbre", "voiture", "ordinateur", "musique", "plage", "montagne",],
-        cinema: ["armagedon","le grand bleu"],
-        games: ["mario", "luigi", "pikachu", "oblivion", "skyrim", "zelda"],
-        language: ["french", "english", "spanish", "italian", "german", "russian"],
+    cinema : [
+        "Inception",
+        "The Shawshank Redemption",
+        "Pulp Fiction",
+        "The Godfather",
+        "Forrest Gump",
+        "The Matrix",
+        "The Dark Knight",
+        "Fight Club",
+        "Star Wars",
+        "The Lord of the Rings",
+        "Jurassic Park",
+        "Avatar",
+        "Titanic",
+        "Gladiator",
+        "Inglourious Basterds",
+        "The Lion King",
+        "Braveheart",
+        "Eternal Sunshine of the Spotless Mind",
+        "The Avengers",
+        "Toy Story",
+        "The Silence of the Lambs",
+        "The Social Network",
+        "The Departed",
+        "Interstellar",
+        "The Revenant",
+        "Casablanca",
+        "Blade Runner",
+        "The Grand Budapest Hotel",
+        "In Bruges",
+        "The Big Lebowski",
+        "Goodfellas",
+        "The Sixth Sense",
+        "No Country for Old Men",
+        "Mad Max: Fury Road",
+        "Schindler's List",
+        "The Green Mile",
+        "The Shape of Water",
+        "La La Land",
+        "The Truman Show",
+        "The Shining",
+        "Gone with the Wind",
+        "The Pianist",
+        "Drive",
+        "Inception",
+        "The Godfather",
+        "The Departed",
+        "A Clockwork Orange",
+        "Reservoir Dogs",
+        "The Great Gatsby"
+    ],
+    games : [
+      "Super Mario Odyssey",
+      "The Legend of Zelda",
+      "Grand Theft Auto",
+      "Red Dead Redemption",
+      "The Witcher",
+      "Dark Souls",
+      "Minecraft",
+      "Overwatch",
+      "Fortnite",
+      "Call of Duty",
+      "Cyberpunk",
+      "Assassin's Creed Valhalla",
+      "Halo",
+      "God of War",
+      "Skyrim",
+      "Final Fantasy",
+      "Destiny",
+      "The Last of Us",
+      "Rainbow Six Siege",
+      "Animal Crossing",
+      "Fallout",
+      "Super Smash Bros",
+      "Resident Evil",
+      "Bloodborne",
+      "League of Legends",
+      "Counter-Strike",
+      "World of Warcraft",
+      "Mass Effect",
+      "Borderlands",
+      "Diablo",
+      "Metal Gear Solid",
+      "Horizon Zero Dawn",
+      "Doom",
+      "StarCraft",
+      "The Sims",
+      "Far Cry",
+      "Rainbow Six Siege",
+      "Gears of War",
+      "NieR: Automata",
+      "Kingdom Hearts",
+      "Dragon Age",
+      "The Division",
+      "Monster Hunter",
+      "No Man's Sky",
+      "FIFA",
+      "NBA",
+      "Rocket League"
+    ],
+    animals : [
+        "Aardvark",
+        "Albatross",
+        "Alligator",
+        "Alpaca",
+        "Ant",
+        "Anteater",
+        "Antelope",
+        "Ape",
+        "Armadillo",
+        "Donkey",
+        "Baboon",
+        "Badger",
+        "Barracuda",
+        "Bat",
+        "Bear",
+        "Beaver",
+        "Bee",
+        "Bison",
+        "Boar",
+        "Buffalo",
+        "Butterfly",
+        "Camel",
+        "Capybara",
+        "Caribou",
+        "Cassowary",
+        "Cat",
+        "Caterpillar",
+        "Cattle",
+        "Chamois",
+        "Cheetah",
+        "Chicken",
+        "Chimpanzee",
+        "Chinchilla",
+        "Chough",
+        "Clam",
+        "Cobra",
+        "Cockroach",
+        "Cod",
+        "Cormorant",
+        "Coyote",
+        "Crab",
+        "Crane",
+        "Crocodile",
+        "Crow",
+        "Curlew",
+        "Deer",
+        "Dinosaur",
+        "Dog",
+        "Dogfish",
+        "Dolphin",
+        "Dotterel",
+        "Dove",
+        "Dragonfly",
+        "Duck",
+        "Dugong",
+        "Dunlin",
+        "Eagle",
+        "Echidna",
+    ]
+},
+];
 
-    }
-  ];
+
 let selectedWord;
 let TotalWordsSuccess = 0;
 let word = [];
@@ -88,8 +245,8 @@ function choiceTheme(){
         checkedTheme(wordsTheme)
         if(wordsTheme == "all"){
             const items = words.map(item => {
-                for (let i = 0; i < item.animal.length; i++) {
-                    choiceWords.push(item.animal[i]);
+                for (let i = 0; i < item.animals.length; i++) {
+                    choiceWords.push(item.animals[i]);
     
                 }
                 for (let i = 0; i < item.games.length; i++) {
@@ -98,22 +255,14 @@ function choiceTheme(){
                 for (let i = 0; i < item.cinema.length; i++) {
                     choiceWords.push(item.cinema[i]);
                 }
-                for (let i = 0; i < item.language.length; i++) {
-                    choiceWords.push(item.language[i]);
-                }
-                selectedWord = choiceWords[Math.floor(Math.random() * words.length)];
+                selectedWord = choiceWords[Math.floor(Math.random() * choiceWords.length).toLocaleLowerCase()];
             });
         }else if(wordsTheme == "games"){
-            const items = words.map(item => {
-                for (let i = 0; i < item.games.length; i++) {
-                    choiceWords.push(item.games[i]);
-                }
-                selectedWord = choiceWords[Math.floor(Math.random() * words.length)];
-            });
+            selectedWord = words[0].games[Math.floor(Math.random() * words[0].games.length)].toLocaleLowerCase();
         }else if(wordsTheme == "cinema"){
-            selectedWord = words[0].cinema[Math.floor(Math.random() * words.length)];
-        }else if(wordsTheme == "language"){
-            selectedWord = words[0].language[Math.floor(Math.random() * words.length)];
+            selectedWord = words[0].cinema[Math.floor(Math.random() * words[0].cinema.length).toLocaleLowerCase()];
+        }else if(wordsTheme == "animals"){
+            selectedWord = words[0].language[Math.floor(Math.random() * words[0].language.length).toLocaleLowerCase()];
         }
     }else{
         localStorage.setItem("theme", "all");
@@ -217,9 +366,10 @@ function updateTotalWords(){
  
 // Update the word container with current guesses
 function updateWordContainer() {
-    wordContainer.innerHTML = selectedWord
+    wordContainer.innerHTML =
+    selectedWord
     .split('')
-    .map(letter => guessedLetters.includes(letter) ? letter : '_')
+    .map(letter => guessedLetters.includes(letter) ? letter : '_' && letter == ' ' ? '&nbsp;' : '_' && letter == '-' ? '-' : '_' && letter == "'" ? "'" : '_')
     .join(' ');
     if (!wordContainer.innerHTML.includes('_')) {
         localStorage.setItem('player', JSON.stringify({name: playerName.textContent, score: score, TotalWordsSuccess: TotalWordsSuccess + 1}));
