@@ -17,6 +17,49 @@
                 <button type="submit" id="submit">Submit</button>
             </form>
         </div>
+        <div class="menu">
+            <div class="menu-clic" onclick="openMenu()">Menu</div>
+            <fieldset>
+                <legend>Choose your difficult:</legend>
+                <div>
+                  <input class="difficult" type="checkbox" id="easy" name="difficult"  onclick="selectOnlyThisDufficult(this)"/>
+                  <label for="easy">easy</label>
+                </div>
+              
+                <div>
+                  <input class="difficult" type="checkbox" id="normal" name="difficult" onclick="selectOnlyThisDufficult(this)" />
+                  <label for="normal">normal</label>
+                </div>
+                <div>
+                    <input class="difficult" type="checkbox" id="hard" name="difficult" onclick="selectOnlyThisDufficult(this)"/>
+                    <label for="hard">hard</label>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>Choose your theme:</legend>
+                <div>
+                    <input class="theme" type="checkbox" id="all" name="theme"  onclick="selectOnlyThisTheme(this)"/>
+                    <label for="all">all</label>
+                  </div>
+                <div>
+                    <input class="theme" type="checkbox" id="games" name="theme" onclick="selectOnlyThisTheme(this)"/>
+                    <label for="video_games">Videos games</label>
+                  </div>
+                  <div>
+                    <input class="theme" type="checkbox" id="cinema" name="theme" onclick="selectOnlyThisTheme(this)"/>
+                    <label for="cinema">cinema</label>
+                  </div>
+                  <div>
+                    <input class="theme" type="checkbox" id="language" name="theme" onclick="selectOnlyThisTheme(this)"/>
+                    <label for="language">language</label>
+                  </div>
+              </fieldset>
+              <fieldset class="fieldDelete">
+                <legend>Delete player:</legend>
+                <img class="delete-player" src="./assets/images/delete.png" alt="" onclick="deletePlayer()">
+              </fieldset>
+            
+        </div>
         <svg id="hangman-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 400 500" stroke="#000000" fill="none">
             <polyline stroke-width="10" stroke-miterlimit="10" points="253.996,142.899 253.996,59.666 115.663,59.666 115.663,434.999 "/>
             <line stroke-width="10" stroke-miterlimit="10" x1="392.33" y1="434.999" x2="8.33" y2="434.999"/>
@@ -26,7 +69,8 @@
         <div class="player-infos">
             <div class="player-name">Player: <strong></strong></div>
             <span class="player-score">Score: <strong></strong></span>
-            <div class="total-words">Words Success :<strong></strong></div>
+            <div class="total-words">Words:<strong></strong></div>
+            <div class="trials">Nb trials:<strong></strong></div>
         </div>
         <div class="game">
             <div class="word-container" id="word-container"></div>

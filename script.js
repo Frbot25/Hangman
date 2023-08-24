@@ -7,47 +7,19 @@ const buttonDelete = document.getElementById('delete');
 const modal = document.querySelector('.modal');
 const modalButton = document.querySelector('.modal button');
 const modalInput = document.querySelector('.modal input');
-const player = JSON.parse(localStorage.getItem('player'));
 const totalWords = document.querySelector('.total-words strong');
 const words = [
-    "chat", "chien", "maison", "soleil", "arbre", "voiture", "ordinateur", "musique", "plage", "montagne",
-    "fleur", "etoile", "velo", "jardin", "pomme", "orange", "livre", "film", "avion", "restaurant",
-    "internet", "cafe", "football", "crayon", "feuille", "ecole", "famille", "chanson", "route", "porte"
-    , "eclair", "nuage", "souris", "cle", "bateau", "chocolat", "horloge", "piano", "montre",
-    "stylo", "telephone", "travail", "amour", "argent", "vacances", "voyage", "ciel", "lune", "mario",
-    "pays", "ville", "piscine", "mer", "bain", "bouteille", "bureau", "carte", "carton", "cave",
-    "cercle", "chambre", "chapeau", "chemin", "chiffre", "chocolat", "ciel", "cigarette", "cle", "coeur",
-    "coin", "colle", "corde", "corps", "coton", "cou", "couleur", "courant", "couteau", "couvert",
-    "creux", "creve", "critique", "croix", "cube", "cuisine", "cuisiniere", "cycle", "danse", "de",
-    "dent", "dentiste", "developpeur", "devoir", "dictionnaire", "dimanche", "docteur", "doigt", "dollar", "dormir",
-    "douche", "douleur", "doux", "drole", "droit", "droite", "dur", "eau", "ecole", "ecran",
-    "pain", "papier", "parc", "parce", "parfum", "parler", "partie", "passer", "pate", "patin",
-    "pauvre", "pays", "peau", "peche", "peinture", "pelouse", "penible", "penser", "perdre", "perle",
-    "personne", "petit", "peur", "peut", "peux", "photo", "phrase", "pied", "pierre", "pilote",
-    "pinceau", "piscine", "place", "plafond", "plage", "plaisir", "plan", "planche", "plante", "plastique",
-    "plein", "pleurer", "pleuvoir", "plombier", "plonger", "pluie", "plus", "poche", "poignee", "poing",
-    "point", "poisson", "pomme", "pont", "porte", "poser", "position", "possible", "poste", "poubelle",
-    "vendredi", "vendre", "venir", "vent", "vente", "verre", "vers", "vert", "veste", "victime",
-    "video", "vieux", "ville", "vin", "visage", "visite", "vite", "vitre", "vivant", "vivre",
-    "voiture", "voix", "vol", "voler", "voleur", "vouloir", "vrai", "vue", "wagon", "week",
-    "radio", "ramasser", "rapide", "rasoir", "rayon", "recevoir", "recette", "regard", "regarder", "regle",
-    "reine", "rejouer", "remercier", "remonter", "remplir", "rencontrer", "rendre", "rentrer", "reparer", "repete",
-    "reponse", "reposer", "ressembler", "retour", "retourner", "reussir", "reve", "revenir", "revolver", "riche",
-    "rideau", "rien", "rire", "robe", "robinet", "robot", "rocher", "roi", "role", "roue",
-    "rouge", "rouler", "route", "rouvrir", "ruban", "rue", "rugby", "ruisseau", "sable", "sac",
-    "saint", "saison", "salade", "salle", "salon", "salut", "samedi", "sandwich", "sang", "sante",
-    "sauter", "sauver", "savoir", "science", "scie", "seance", "secher", "secret", "securite", "semaine",
-    // Ajoutez plus de mots ici...
+    {
+        animal: ["chat", "chien", "maison", "soleil", "arbre", "voiture", "ordinateur", "musique", "plage", "montagne",],
+        cinema: ["armagedon","le grand bleu"],
+        games: ["mario", "luigi", "pikachu", "oblivion", "skyrim", "zelda"],
+        language: ["french", "english", "spanish", "italian", "german", "russian"],
+
+    }
   ];
-let selectedWord = words[Math.floor(Math.random() * words.length)];
+let selectedWord;
 let TotalWordsSuccess = 0;
 let word = [];
-if(player){
-    TotalWordsSuccess = player.TotalWordsSuccess || 0;
-}else{
-    TotalWordsSuccess = 0;
-}
-
 const confetis = document.getElementById('confetti');
 let guessedLetters = [];
 let wrongLetters = [];
@@ -55,7 +27,15 @@ let errorLetters = -1;
 let score = 0;
 let namePlayer = 'player';
 let playerName = document.querySelector('.player-name strong');
-const hangmanParts = [
+let difficulty = 6;
+const trials = document.querySelector('.trials strong');
+const menuOpen = document.querySelector('.menu-clic');
+function openMenu(){
+    document.querySelector('.menu').classList.toggle('clic');
+}
+
+// SVG parts for hangman
+let hangmanParts = [
     '<circle stroke-width="10" stroke-miterlimit="10" cx="254.404" cy="174.26" r="29.412"/>',
 '<line stroke-width="10" stroke-miterlimit="10" x1="254.404" y1="203.672" x2="254.404" y2="314.056"/>',
 '<line stroke-width="10" stroke-miterlimit="10" x1="255.339" y1="311.094" x2="185.875" y2="406.468"/>',
@@ -66,28 +46,106 @@ const hangmanParts = [
 '<circle fill="#000000" cx="265.663" cy="169.333" r="3.667"/>',
 '<path stroke-width="4" stroke-miterlimit="10" d="M245.571,190.082c0-4.879,3.955-8.833,8.833-8.833 c4.879,0,8.833,3.955,8.833,8.833"/>'
 ];
-if(player){
-    modal.style.display = 'none';
-    score = player.score;
-    scorePlayer.textContent = score;
-    playerName.textContent = player.name;
-    totalWords.textContent = player.TotalWordsSuccess;
-}else {
-    modal.style.display = 'block';
-    score = 0;
-    scorePlayer.textContent = score;
-    playerName.textContent = 'player';
-    totalWords.textContent = 0;
+let difficult = "normal";
+const difficultChoice = document.getElementsByName("difficult");
+const theme = document.getElementsByName("theme");
+const wordsTheme = localStorage.getItem('theme');
+const level = localStorage.getItem('difficult');
+function checkedTheme(){
+    for (var i = 0; i < theme.length; i++){
+        if(theme[i].id == wordsTheme){
+            theme[i].checked = true;
+        }
+    }
 }
+function checkedDifficult(){
+    if(level){
+        if(level == "easy"){
+            difficulty = 10;
+        }else if(level == "hard"){
+            difficulty = 3;
+        }else{
+            difficulty = 6;
+        }
+        for (var i = 0; i < difficultChoice.length; i++){
+            if(difficultChoice[i].id == level){
+                difficultChoice[i].checked = true;
+            }
+        }
+    }else{
+        localStorage.setItem("difficult", "normal");
+    }
+    for (var i = 0; i < difficultChoice.length; i++){
+        if(difficultChoice[i].id == wordsTheme){
+            difficultChoice[i].checked = true;
+        }
+    }
+    trials.textContent = difficulty;
+}
+function choiceTheme(){
+    const choiceWords = [];
+    if(wordsTheme){
+        checkedTheme(wordsTheme)
+        if(wordsTheme == "all"){
+            const items = words.map(item => {
+                for (let i = 0; i < item.animal.length; i++) {
+                    choiceWords.push(item.animal[i]);
+    
+                }
+                for (let i = 0; i < item.games.length; i++) {
+                    choiceWords.push(item.games[i]);
+                }
+                for (let i = 0; i < item.cinema.length; i++) {
+                    choiceWords.push(item.cinema[i]);
+                }
+                for (let i = 0; i < item.language.length; i++) {
+                    choiceWords.push(item.language[i]);
+                }
+                selectedWord = choiceWords[Math.floor(Math.random() * words.length)];
+            });
+        }else if(wordsTheme == "games"){
+            const items = words.map(item => {
+                for (let i = 0; i < item.games.length; i++) {
+                    choiceWords.push(item.games[i]);
+                }
+                selectedWord = choiceWords[Math.floor(Math.random() * words.length)];
+            });
+        }else if(wordsTheme == "cinema"){
+            selectedWord = words[0].cinema[Math.floor(Math.random() * words.length)];
+        }else if(wordsTheme == "language"){
+            selectedWord = words[0].language[Math.floor(Math.random() * words.length)];
+        }
+    }else{
+        localStorage.setItem("theme", "all");
+    }
+};
+
+function selectOnlyThisDufficult(id){
+    Array.prototype.forEach.call(difficultChoice,function(el){
+      el.checked = false;
+    });
+    id.checked = true;
+    localStorage.setItem("difficult", id.id);
+    window?.location?.reload();
+}
+function selectOnlyThisTheme(id){
+    Array.prototype.forEach.call(theme,function(el){
+        el.checked = false;
+    });
+    id.checked = true;
+    localStorage.setItem("theme", id.id);
+    window?.location?.reload();
+  }
+  
+
 
 if(modal){
 modalButton.addEventListener('click', function(e) {
     e.preventDefault();
-    localStorage.setItem('player', JSON.stringify({name: modalInput.value, score: 0, TotalWordsSuccess: 0}));
     if(modalInput.value == ''){
-        localStorage.setItem('player', JSON.stringify({name: 'player', score: 0}));
-        playerName.textContent = modalInput.value;
+        modalInput.value = 'player';
     }
+    localStorage.setItem('player', JSON.stringify({name: modalInput.value, score: 0, TotalWordsSuccess: 0}));
     scorePlayer.textContent = score;
     playerName.textContent = modalInput.value;
     modal.style.display = 'none';
@@ -102,8 +160,28 @@ function parseSVG(s) {
 		frag.appendChild(div.firstChild.firstChild);
 	return frag;
 }
+function checkPlayer(){
+    const player = JSON.parse(localStorage.getItem('player'));
+    if(player){
+        modal.style.display = 'none';
+        scorePlayer.textContent =player.score;
+        playerName.textContent = player.name;
+        totalWords.textContent = player.TotalWordsSuccess;
+        score = player.score;
+        TotalWordsSuccess = player.TotalWordsSuccess;
+    }else{
+        modal.style.display = 'block';
+    }
+}
+function deletePlayer(){
+    localStorage.clear();
+    location.reload();
+}
 // Initialize the game
 function initGame() {
+    checkedDifficult();
+    choiceTheme();
+    checkPlayer();
     document.getElementById('added-parts').innerHTML='';
     const player = JSON.parse(localStorage.getItem('player'));
     guessedLetters = [];
@@ -113,11 +191,15 @@ function initGame() {
     if(player){
         scorePlayer.textContent =player.score;
         playerName.textContent = player.name;
+        totalWords.textContent = player.TotalWordsSuccess;
+        score = player.score;
+        TotalWordsSuccess = player.TotalWordsSuccess;
+    }else{
+        modal.style.display = 'block';
     }
     confetis.classList.remove('show');
     guessedLetters = [];
     wrongLetters = [];
-    selectedWord = words[Math.floor(Math.random() * words.length)];
     for (let letter of selectedWord) {
         word.push(letter);
     }
@@ -126,7 +208,13 @@ function initGame() {
     restartButton.style.display = 'none';
     renderButtons();
 }
-
+function updateScore(){
+    scorePlayer.textContent = score;
+}
+function updateTotalWords(){
+    totalWords.textContent = TotalWordsSuccess;
+}
+ 
 // Update the word container with current guesses
 function updateWordContainer() {
     wordContainer.innerHTML = selectedWord
@@ -134,8 +222,7 @@ function updateWordContainer() {
     .map(letter => guessedLetters.includes(letter) ? letter : '_')
     .join(' ');
     if (!wordContainer.innerHTML.includes('_')) {
-        TotalWordsSuccess = TotalWordsSuccess + 1;
-        localStorage.setItem('player', JSON.stringify({name: playerName.textContent, score: score, TotalWordsSuccess: TotalWordsSuccess}));
+        localStorage.setItem('player', JSON.stringify({name: playerName.textContent, score: score, TotalWordsSuccess: TotalWordsSuccess + 1}));
         restartButton.style.display = 'block';
         endGame();
         buttonDelete.style.display = 'block';
@@ -144,18 +231,17 @@ function updateWordContainer() {
         confetis.classList.add('show');
     }
 }
-    if(wrongLetters.length == 6){
+    if(wrongLetters.length == difficulty){
+        localStorage.setItem('player', JSON.stringify({name: playerName.textContent, score: score, TotalWordsSuccess: TotalWordsSuccess}));
         restartButton.style.display = 'block';
         restartButton.textContent = 'You Lose! Play Again';
         endGame();
         return;
     }
 }
-
 // Handle letter guess
 function handleGuess(event) {
-    const guessedLetter = event.target.textContent.toLowerCase();
-    
+    const guessedLetter = event.target.textContent.toLowerCase(); 
     if (!guessedLetters.includes(guessedLetter)) {
         guessedLetters.push(guessedLetter);
         event.target.disabled = true;
@@ -164,19 +250,15 @@ function handleGuess(event) {
             errorLetters++  ;
             const add = document.getElementById('added-parts').appendChild(parseSVG(hangmanParts[errorLetters]));
             wrongLettersContainer.textContent = 'Wrong letters: ' + wrongLetters.join(', ');
-
             // You can add animations here for wrong guesses
         }
         if (selectedWord.includes(guessedLetter)) {
-            score += 10;
+            score = score + 10;
             scorePlayer.textContent = score;
-           
         }
-
         updateWordContainer();
     }
 }
-
 // Render letter buttons
 function renderButtons() {
     buttonsContainer.innerHTML = '';

@@ -12,9 +12,36 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    padding-top: 10px;
 }
+.menu {
+    position: absolute ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 20px;
+    right: 0;
+    padding: 20px;
+}
+#delete-playey {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    padding: 20px;
+}
+.menu ul {
+    list-style: none;
+    margin-right: 40px;
+    padding: 0;
+    display: flex ;
+    flex-direction: column;
+    align-items: end;
 
+}
+h1 {
+    margin: 0;
+}
 .game {
     display: flex;
     flex-direction: column;
@@ -34,7 +61,7 @@ h1 {
 
 .word-container {
     font-size: 28px;
-    margin: 10px 0;
+
 }
 
 .wrong-letters {
@@ -99,13 +126,26 @@ h1 {
     font-size: 18px;
     transition: background-color 0.2s;
 }
+.delete-player {
+    width: 50px;
+    height: 50px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+.delete-player:hover {
+    scale: 1.1;
+    rotate: 5deg;
+}
 .wrong-letter {
     color: red;
     display: inline-block;
     position: relative;
     animation: shake 0.5s ease-in-out;
 }
-
+.trials strong {
+    color: #333;
+    margin: 0 10px;
+}
 @keyframes shake {
     0%, 100% {
         transform: translateX(0);
@@ -159,7 +199,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px;
+    margin: 0 0 10px 0;
 }
 .player-name strong {
     margin: 0 10px;
@@ -172,14 +212,160 @@ h1 {
     color: #13b356;
     margin: 0 10px;
 }
-canvas {
+#confetti {
     display: flex;
     position: absolute;
     opacity: 0;
     z-index: 0;
 }
-canvas.show {
+#confetti.show {
     opacity: 1;
     z-index: 1;
 }
+fieldset {
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 140px;
+}
+.fieldDelete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+@media (max-width: 768px) {
+    .menu {
+        position: absolute ;
+        top: 20px;
+        right: -50%;
+        z-index: 999;
+        background-color: rgb(199, 201, 204);
+        animation: close 0.5s ease-in-out;
+    }
+    .menu-clic {
+        position: relative;
+        rotate: 90deg;
+        align-items: center;
+        right: 110px;
+        top: -10px;
+        background-color: #cf2626;
+        width: 40px;
+        height: 20px;
+        z-index: 999;
+        padding: 5px;
+        color: #fff;
+        border-radius: 0 0 5px 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        
+    }
+    .menu-clic:hover {
+        background-color: #f00;
+        border: #13b356 1px solid;
+        cursor: pointer;
+    }
+    .menu.clic {
+        right: 0;
+        animation: open 0.5s ease-in-out;
+    }
+   .buttons-container .button {
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+   }
+   @keyframes open {
+       0% {
+           transform: translateX(100%);
+       }
+       100% {
+           transform: translateX(0);
+       }
+   }
+    @keyframes close {
+         0% {
+              transform: translateX(-50%);
+         }
+         100% {
+              transform: translateX(0);
+         }
+    
+   }
+}
+@media (max-width: 425px) {
+    .menu {
+        position: absolute ;
+        top: 20px;
+        right: -60%;
+        z-index: 999;
+        background-color: rgb(199, 201, 204);
+        animation: close 0.5s ease-in-out;
+        z-index: 9999;
+        border-radius: 0 0 0 10px;
+    }
+    .menu-clic {
+        position: relative;
+        rotate: 90deg;
+        align-items: center;
+        right: 110px;
+        top: -10px;
+        background-color: #cf2626;
+        width: 40px;
+        height: 20px;
+        z-index: 999;
+        padding: 5px;
+        color: #fff;
+        border-radius: 0 0 5px 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        
+    }
+    .menu-clic:hover {
+        background-color: #f00;
+        border: #13b356 1px solid;
+        cursor: pointer;
+    }
+    .menu.clic {
+        right: 0;
+        animation: open 0.5s ease-in-out;
+    }
+   .buttons-container .button {
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+   }
+   .total-words, .trials {
+    font-size: .8em;
+   }
+
+    
+   }
+   @keyframes open {
+       0% {
+           transform: translateX(100%);
+       }
+       100% {
+           transform: translateX(0);
+       }
+   }
+    @keyframes close {
+         0% {
+              transform: translateX(-50%);
+         }
+         100% {
+              transform: translateX(0);
+         }
+    
+   }
 
