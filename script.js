@@ -194,15 +194,16 @@ function openMenu(){
 // SVG parts for hangman
 let hangmanParts = [
     '<circle stroke-width="10" stroke-miterlimit="10" cx="254.404" cy="174.26" r="29.412"/>',
-'<line stroke-width="10" stroke-miterlimit="10" x1="254.404" y1="203.672" x2="254.404" y2="314.056"/>',
-'<line stroke-width="10" stroke-miterlimit="10" x1="255.339" y1="311.094" x2="185.875" y2="406.468"/>',
-'<line stroke-width="10" stroke-miterlimit="10" x1="323.46" y1="406.468" x2="253.996" y2="311.094"/>',
+    '<line stroke-width="10" stroke-miterlimit="10" x1="254.404" y1="203.672" x2="254.404" y2="314.056"/>',
+    '<line stroke-width="10" stroke-miterlimit="10" x1="255.339" y1="311.094" x2="185.875" y2="406.468"/>',
+    '<line stroke-width="10" stroke-miterlimit="10" x1="323.46" y1="406.468" x2="253.996" y2="311.094"/>',
 '<line stroke-width="10" stroke-miterlimit="10" x1="254.404" y1="229.409" x2="164.11" y2="256.834"/>',
 '<line stroke-width="10" stroke-miterlimit="10" x1="254.404" y1="229.409" x2="344.699" y2="256.834"/>',
 '<circle fill="#000000" cx="243.663" cy="169.333" r="3.667"/>',
 '<circle fill="#000000" cx="265.663" cy="169.333" r="3.667"/>',
 '<path stroke-width="4" stroke-miterlimit="10" d="M245.571,190.082c0-4.879,3.955-8.833,8.833-8.833 c4.879,0,8.833,3.955,8.833,8.833"/>'
 ];
+let choiceWords = [];
 let difficult = "normal";
 const difficultChoice = document.getElementsByName("difficult");
 const theme = document.getElementsByName("theme");
@@ -214,7 +215,21 @@ function checkedTheme(){
             theme[i].checked = true;
         }
     }
+
 }
+const items = words.map(item => {
+    for (let i = 0; i < item.animals.length; i++) {
+        choiceWords.push(item.animals[i]);
+
+    }
+    for (let i = 0; i < item.games.length; i++) {
+        choiceWords.push(item.games[i]);
+    }
+    for (let i = 0; i < item.cinema.length; i++) {
+        choiceWords.push(item.cinema[i]);
+    }
+    selectedWord = choiceWords[Math.floor(Math.random() * choiceWords.length)].toLocaleLowerCase();
+});
 function checkedDifficult(){
     if(level){
         if(level == "easy"){
@@ -239,8 +254,8 @@ function checkedDifficult(){
     }
     trials.textContent = difficulty;
 }
+
 function choiceTheme(){
-    const choiceWords = [];
     if(wordsTheme){
         checkedTheme(wordsTheme)
         if(wordsTheme == "all"){
@@ -440,4 +455,22 @@ buttonDelete.addEventListener('click', {
 
 
 // Initialize the game for the first time
-initGame();
+window.addEventListener('load', function(){
+    this.localStorage.setItem("difficult", "normal");
+    this.localStorage.setItem("theme", "all");
+    theme.forEach(element => {
+        if(element.id == "all"){
+            element.checked = true;
+        }
+    });
+    difficultChoice.forEach(element => {
+        if(element.id == "normal"){
+            element.checked = true;
+        }
+    });
+    checkedDifficult();
+    choiceTheme();
+    initGame();
+    
+  }
+);
