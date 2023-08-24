@@ -255,14 +255,14 @@ function choiceTheme(){
                 for (let i = 0; i < item.cinema.length; i++) {
                     choiceWords.push(item.cinema[i]);
                 }
-                selectedWord = choiceWords[Math.floor(Math.random() * choiceWords.length).toLocaleLowerCase()];
+                selectedWord = choiceWords[Math.floor(Math.random() * choiceWords.length)].toLocaleLowerCase();
             });
         }else if(wordsTheme == "games"){
             selectedWord = words[0].games[Math.floor(Math.random() * words[0].games.length)].toLocaleLowerCase();
         }else if(wordsTheme == "cinema"){
-            selectedWord = words[0].cinema[Math.floor(Math.random() * words[0].cinema.length).toLocaleLowerCase()];
+            selectedWord = words[0].cinema[Math.floor(Math.random() * words[0].cinema.length)].toLocaleLowerCase();
         }else if(wordsTheme == "animals"){
-            selectedWord = words[0].language[Math.floor(Math.random() * words[0].language.length).toLocaleLowerCase()];
+            selectedWord = words[0].animals[Math.floor(Math.random() * words[0].animals.length)].toLocaleLowerCase();
         }
     }else{
         localStorage.setItem("theme", "all");
