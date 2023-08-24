@@ -299,11 +299,11 @@ fieldset {
     
    }
 }
-@media (max-width: 425px) {
+@media (max-width: 360px) {
     .menu {
         position: absolute ;
         top: 20px;
-        right: -60%;
+        right: -55%;
         z-index: 999;
         background-color: rgb(199, 201, 204);
         animation: close 0.5s ease-in-out;
@@ -331,7 +331,6 @@ fieldset {
     }
     .menu-clic:hover {
         background-color: #f00;
-        border: #13b356 1px solid;
         cursor: pointer;
     }
     .menu.clic {
@@ -368,4 +367,71 @@ fieldset {
          }
     
    }
+   @media (max-width: 320px) {
+    .menu {
+        position: absolute ;
+        top: 20px;
+        right: -60%;
+        z-index: 999;
+        background-color: rgb(199, 201, 204);
+        animation: close 0.5s ease-in-out;
+        z-index: 9999;
+        border-radius: 0 0 0 10px;
+    }
+    .menu-clic {
+        position: relative;
+        rotate: 90deg;
+        align-items: center;
+        right: 110px;
+        top: -10px;
+        background-color: #cf2626;
+        width: 40px;
+        height: 20px;
+        z-index: 999;
+        padding: 5px;
+        color: #fff;
+        border-radius: 0 0 5px 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        
+    }
+    .menu-clic:hover {
+        background-color: #f00;
+        cursor: pointer;
+    }
+    .menu.clic {
+        right: 0;
+        animation: open 0.5s ease-in-out;
+    }
+   .buttons-container .button {
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+   }
+   .total-words, .trials {
+    font-size: .8em;
+   }
 
+    
+   }
+   @keyframes open {
+       0% {
+           transform: translateX(100%);
+       }
+       100% {
+           transform: translateX(0);
+       }
+   }
+    @keyframes close {
+         0% {
+              transform: translateX(-50%);
+         }
+         100% {
+              transform: translateX(0);
+         }
+    
+   }
