@@ -7,7 +7,7 @@
 <center> <img src="./assets/images/mobile.png" width="200">
 version mobile
 
-<img src="./assets/images/desktop.jpg" width="400"> </center>
+<img src="./assets/images/desktop.JPG" width="400"> </center>
 
 ### number of files
 * index.html
