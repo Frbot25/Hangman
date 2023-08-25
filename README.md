@@ -3,9 +3,9 @@
 ## project made in vanilla javascript
 <a href="https://frbot25.github.io/Hangman/">https://frbot25.github.io/Hangman/</a>
 
-
-<center> <img src="./assets/images/mobile.png" width="200">
 version mobile
+<center> <img src="./assets/images/mobile.png" width="200">
+
 
 <img src="./assets/images/desktop.JPG" width="400"> </center>
 
