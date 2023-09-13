@@ -187,6 +187,9 @@ let playerName = document.querySelector('.player-name strong');
 let difficulty = 6;
 const trials = document.querySelector('.trials strong');
 const menuOpen = document.querySelector('.menu-clic');
+const loseAudio = new Audio('./assets/audio/huee.mp3');
+const winAudio = new Audio('./assets/audio/Applaudissements.mp3');
+const clickAudio = new Audio('./assets/audio/beep.mp3');
 function openMenu() {
     document.querySelector('.menu').classList.toggle('clic');
 }
@@ -401,6 +404,7 @@ function updateWordContainer() {
         localStorage.setItem('player', JSON.stringify({ name: playerName.textContent, score: score, TotalWordsSuccess: TotalWordsSuccess + 1 }));
         restartButton.style.display = 'block';
         endGame();
+        winAudio.play();
         buttonDelete.style.display = 'block';
         restartButton.textContent = 'You Win! Play Again';
         if (confetis) {
@@ -410,6 +414,7 @@ function updateWordContainer() {
     if (wrongLetters.length == difficulty) {
         localStorage.setItem('player', JSON.stringify({ name: playerName.textContent, score: score, TotalWordsSuccess: TotalWordsSuccess }));
         restartButton.style.display = 'block';
+        loseAudio.play();
         restartButton.textContent = 'You Lose! Play Again';
         endGame();
         return;
@@ -417,6 +422,7 @@ function updateWordContainer() {
 }
 // Handle letter guess
 function handleGuess(event) {
+    clickAudio.play();
     const guessedLetter = event.target.textContent.toLowerCase();
     if (!guessedLetters.includes(guessedLetter)) {
         guessedLetters.push(guessedLetter);
