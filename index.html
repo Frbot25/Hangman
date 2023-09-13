@@ -22,37 +22,41 @@
             <fieldset>
                 <legend>Choose your difficult:</legend>
                 <div>
-                  <input class="difficult" type="checkbox" id="easy" name="difficult"  onclick="selectOnlyThisDufficult(this)"/>
+                  <input class="difficult" type="checkbox" id="easy" name="difficult"  onclick="selectOnlyThisDufficult(id)"/>
                   <label for="easy">easy</label>
                 </div>
               
                 <div>
-                  <input class="difficult" type="checkbox" id="normal" name="difficult" onclick="selectOnlyThisDufficult(this)"  />
+                  <input class="difficult" type="checkbox" id="normal" name="difficult" onclick="selectOnlyThisDufficult(id)"  />
                   <label for="normal">normal</label>
                 </div>
                 <div>
-                    <input class="difficult" type="checkbox" id="hard" name="difficult" onclick="selectOnlyThisDufficult(this)"/>
+                    <input class="difficult" type="checkbox" id="hard" name="difficult" onclick="selectOnlyThisDufficult(id)"/>
                     <label for="hard">hard</label>
                 </div>
               </fieldset>
               <fieldset>
                 <legend>Choose your theme:</legend>
                 <div>
-                    <input class="theme" type="checkbox" id="all" name="theme"  onclick="selectOnlyThisTheme(this)" />
+                    <input class="theme" type="checkbox" id="all" name="theme"  onclick="selectOnlyThisTheme(id)" />
                     <label for="all">all</label>
                   </div>
                 <div>
-                    <input class="theme" type="checkbox" id="games" name="theme" onclick="selectOnlyThisTheme(this)"/>
+                    <input class="theme" type="checkbox" id="games" name="theme" onclick="selectOnlyThisTheme(id)"/>
                     <label for="video_games">Video games</label>
                   </div>
                   <div>
-                    <input class="theme" type="checkbox" id="cinema" name="theme" onclick="selectOnlyThisTheme(this)"/>
+                    <input class="theme" type="checkbox" id="cinema" name="theme" onclick="selectOnlyThisTheme(id)"/>
                     <label for="cinema">cinema</label>
                   </div>
                   <div>
-                    <input class="theme" type="checkbox" id="animals" name="theme" onclick="selectOnlyThisTheme(this)"/>
+                    <input class="theme" type="checkbox" id="animals" name="theme" onclick="selectOnlyThisTheme(id)"/>
                     <label for="animals">animals</label>
                   </div>
+              </fieldset>
+              <fieldset class="fieldValidate">
+                <legend>Validate choice:</legend>
+                    <button style="background-color: green; color: white;" onclick="validate()">Validate or restart</button>
               </fieldset>
               <fieldset class="fieldDelete">
                 <legend>Delete player:</legend>
