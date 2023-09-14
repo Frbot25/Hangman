@@ -4,6 +4,7 @@ body {
     padding: 0;
     font-family: Lobster, sans-serif;
     background-color: #f8f8f8;
+    overflow: hidden;
 }
 
 .container {
@@ -217,6 +218,7 @@ h1 {
     position: absolute;
     opacity: 0;
     z-index: 0;
+    height: 100vh;
 }
 #confetti.show {
     opacity: 1;
